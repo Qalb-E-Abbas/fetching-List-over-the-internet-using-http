@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart'as http;
 
@@ -32,9 +34,9 @@ class _homePageState extends State<homePage> {
 
 
   // Url for api got from https://thegrowingdeveloper.org/developer-apis
-  final String url = 'https://thegrowingdeveloper.org/apiview?id=1';
+  final String url = 'https://thegrowingdeveloper.org/apiview?id=4';
 
-  String data;
+  List data;
 
   @override
   void initState() {
@@ -51,7 +53,7 @@ class _homePageState extends State<homePage> {
 
     if(response.statusCode == 200){
       setState(() {
-        data = response.body;
+        data = jsonDecode(response.body);
       });
     }
   }
@@ -59,7 +61,7 @@ class _homePageState extends State<homePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: new AppBar(title: Text('Http get'),),
+    return Scaffold(appBar: new AppBar(title: Text('Http get (List)'),),
 
       body: new ListView.builder(
           itemCount: 10,
